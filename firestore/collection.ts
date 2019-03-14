@@ -96,6 +96,15 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
     });
   }
 
+  public async get(type: new () => T) {
+    const querySnapshot = await this.ref.get();
+    const items: Array<FirestoreDocument<T>> = [];
+    querySnapshot.forEach((doc) => {
+      const document = FirestoreDocument.load(this, type, doc);
+      items.push(document);
+    });
+    return items;
+  }
   public find() {
     // TODO
   }

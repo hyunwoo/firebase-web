@@ -67,6 +67,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
   private _id: string;
   // @ts-ignore static 생성자에서 생성됨
   private _data: T;
+  // @ts-ignore
   private _snapshot: firebase.firestore.DocumentSnapshot | null = null;
   private constructor();
   private constructor(
@@ -86,17 +87,8 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
     }
   }
 
-  public saveForce(): Promise<void> {
-    console.log('save force called', this._data);
-    return new Promise((resolve, reject) => {
-      this._document
-        .set(this._data.toObject())
-        .then(() => resolve())
-        .catch((e) => reject(e));
-    });
-  }
   public saveSync(): Promise<void> {
-    console.log('save force called', this._data);
+    console.log('save sync called', this._data);
     return new Promise((resolve, reject) => {
       this._document
         .set(this._data.toObject())
@@ -106,7 +98,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
   }
   public save(wait?: number): void {
     console.log('call save');
-    debounce(() => this.saveForce(), 300)();
+    debounce(() => this.saveSync(), 300)();
   }
   public set(data: T): Promise<void> {
     return new Promise((resolve, reject) => {
