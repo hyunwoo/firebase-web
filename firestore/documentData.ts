@@ -5,7 +5,9 @@ export default abstract class FirestoreDocumentData {
     //   console.log('in prop', property);
     // }
   }
-  public abstract toObject(): object;
+  public toObject(): object {
+    return JSON.parse(JSON.stringify(this));
+  }
   public abstract init(...arg: any[]): void;
 
   public assign(data: object) {
