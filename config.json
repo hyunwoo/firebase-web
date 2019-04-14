@@ -1,8 +1,8 @@
 {
-  "apiKey": "AIzaSyBaTBTMSlEwlverAwcH0TVAP6_rjIMNA5Y",
-  "authDomain": "blog-ec85e.firebaseapp.com",
-  "databaseURL": "https://blog-ec85e.firebaseio.com",
-  "projectId": "blog-ec85e",
-  "storageBucket": "blog-ec85e.appspot.com",
-  "messagingSenderId": "888636209783"
+  "apiKey": "AIzaSyCGDTaBqrwm2bx0mqRaAaEMfnnBcPVMPXU",
+  "authDomain": "bitcoin-trader-d37b7.firebaseapp.com",
+  "databaseURL": "https://bitcoin-trader-d37b7.firebaseio.com",
+  "projectId": "bitcoin-trader-d37b7",
+  "storageBucket": "bitcoin-trader-d37b7.appspot.com",
+  "messagingSenderId": "344332222595"
 }
