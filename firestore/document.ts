@@ -32,7 +32,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
     doc._id = id;
     doc._document = collection.reference.doc(id);
     doc._data = new type();
-    doc._data.init();
+    // doc._data.init();
     return doc;
   }
   public static load<T extends FirestoreDocumentData>(
@@ -143,9 +143,9 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
         .catch((e) => reject(e));
     });
   }
-  public initData(...arg: any[]) {
-    this._data.init(...arg);
-  }
+  // public initData(...arg: any[]) {
+  //   this._data.init(...arg);
+  // }
 }
 
 export default FirestoreDocument;

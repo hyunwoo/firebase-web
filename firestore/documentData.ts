@@ -8,7 +8,7 @@ export default abstract class FirestoreDocumentData {
   public toObject(): object {
     return JSON.parse(JSON.stringify(this));
   }
-  public abstract init(...arg: any[]): void;
+  // public abstract init(...arg: any[]): void;
 
   public assign(data: object) {
     Object.assign(this, data);
