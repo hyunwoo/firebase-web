@@ -93,7 +93,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
       this._document
         .set(this._data.toObject())
         .then(() => resolve())
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
   public save(wait?: number): void {
@@ -105,34 +105,34 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
       this._document
         .set(data)
         .then(() => resolve())
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
   // public update(key: string, val: any): void {
   //   this.__data[key] = val;
   // }
-  public update(data: T): Promise<void> {
+  public update(data: { [P in keyof T]?: T[P] }): Promise<void> {
     return new Promise((resolve, reject) => {
       this._document
         .update(data)
-        .then((documentShapshot) => resolve())
-        .catch((e) => reject(e));
+        .then(documentShapshot => resolve())
+        .catch(e => reject(e));
     });
   }
   public get(): Promise<T> {
     return new Promise((reslove, reject) => {
       this._document
         .get()
-        .then((documentSnapshot) => reslove(documentSnapshot.data() as T))
-        .catch((e) => reject(e));
+        .then(documentSnapshot => reslove(documentSnapshot.data() as T))
+        .catch(e => reject(e));
     });
   }
   public get snapshot(): Promise<firebase.firestore.DocumentSnapshot> {
     return new Promise((resolve, reject) => {
       this._document
         .get()
-        .then((documentSnapshot) => resolve(documentSnapshot))
-        .catch((e) => reject(e));
+        .then(documentSnapshot => resolve(documentSnapshot))
+        .catch(e => reject(e));
     });
   }
   public delete(): Promise<void> {
@@ -140,7 +140,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
       this._document
         .delete()
         .then(() => resolve())
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
   // public initData(...arg: any[]) {

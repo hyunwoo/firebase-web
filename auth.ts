@@ -56,14 +56,14 @@ const auth = {
       firebaseAuth
         .signOut()
         .then(() => reslove())
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
 };
 
-firebaseAuth.onAuthStateChanged((u) => {
+firebaseAuth.onAuthStateChanged(u => {
   console.log('raw, on auth state changed', u);
   const listenerKeys = Object.keys(listeners);
-  listenerKeys.forEach((key) => listeners[key](u));
+  listenerKeys.forEach(key => listeners[key](u));
 });
 export default auth;

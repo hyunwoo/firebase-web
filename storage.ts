@@ -33,7 +33,7 @@ class Storage {
     return new Promise<string>((resolve, reject) => {
       this.ref
         .getDownloadURL()
-        .then((url) => resolve(url))
+        .then(url => resolve(url))
         .catch(reject);
     });
   }

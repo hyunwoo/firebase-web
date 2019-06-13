@@ -37,10 +37,10 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
       this.ref
         .doc(childID)
         .get()
-        .then((snapshot) => {
+        .then(snapshot => {
           resolve(FirestoreDocument.load(this, type, snapshot));
         })
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
 
@@ -49,14 +49,14 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
       this.ref
         .doc(childID)
         .get()
-        .then((documentSnapshot) => {
+        .then(documentSnapshot => {
           if (documentSnapshot.exists) {
             resolve(true);
           } else {
             resolve(false);
           }
         })
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
 
@@ -80,7 +80,7 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
       state: firebase.firestore.DocumentChangeType
     ) => void
   ) {
-    this.ref.onSnapshot((snapshot) => {
+    this.ref.onSnapshot(snapshot => {
       snapshot
         .docChanges()
         .forEach((change: firebase.firestore.DocumentChange) => {
@@ -90,7 +90,7 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
     });
   }
   public clearOnChange() {
-    this.ref.onSnapshot((snapshot) => {
+    this.ref.onSnapshot(snapshot => {
       // Snapshot Listener 초기화
       // https://firebase.google.com/docs/firestore/query-data/listen?hl=ko
     });
@@ -99,7 +99,7 @@ class FirestoreCollection<T extends FirestoreDocumentData> {
   public async get(type: new () => T) {
     const querySnapshot = await this.ref.get();
     const items: Array<FirestoreDocument<T>> = [];
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(doc => {
       const document = FirestoreDocument.load(this, type, doc);
       items.push(document);
     });

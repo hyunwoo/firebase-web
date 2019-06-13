@@ -95,7 +95,7 @@ export default class FirestoreCollectionQuery<T extends FirestoreDocumentData> {
       state: firebase.firestore.DocumentChangeType
     ) => void
   ) {
-    return this.queryReference.onSnapshot((snapshot) => {
+    return this.queryReference.onSnapshot(snapshot => {
       snapshot
         .docChanges()
         .forEach((change: firebase.firestore.DocumentChange) => {
@@ -109,7 +109,7 @@ export default class FirestoreCollectionQuery<T extends FirestoreDocumentData> {
     });
   }
   public clearOnChange() {
-    this.queryReference.onSnapshot((snapshot) => {
+    this.queryReference.onSnapshot(snapshot => {
       // Snapshot Listener 초기화
       // https://firebase.google.com/docs/firestore/query-data/listen?hl=ko
     })();
@@ -119,8 +119,8 @@ export default class FirestoreCollectionQuery<T extends FirestoreDocumentData> {
     return new Promise((reslove, reject) => {
       this.queryReference
         .get()
-        .then((querySnapShot) => {
-          const docs = querySnapShot.docs.map((documentSnapshot) => {
+        .then(querySnapShot => {
+          const docs = querySnapShot.docs.map(documentSnapshot => {
             return FirestoreDocument.load(
               this.collection,
               type,
@@ -129,7 +129,7 @@ export default class FirestoreCollectionQuery<T extends FirestoreDocumentData> {
           });
           reslove(docs);
         })
-        .catch((e) => reject(e));
+        .catch(e => reject(e));
     });
   }
 }
