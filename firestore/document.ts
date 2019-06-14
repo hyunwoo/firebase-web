@@ -88,7 +88,6 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
   }
 
   public saveSync(): Promise<void> {
-    console.log('save sync called', this._data);
     return new Promise((resolve, reject) => {
       this._document
         .set(this._data.toObject())
@@ -97,7 +96,7 @@ class FirestoreDocument<T extends FirestoreDocumentData> {
     });
   }
   public save(wait?: number): void {
-    console.log('call save');
+    // TODO Require Modify. 중복콜 발생 가능성이 있음.
     debounce(() => this.saveSync(), 300)();
   }
   public set(data: T): Promise<void> {

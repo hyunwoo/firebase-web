@@ -33,15 +33,12 @@ const auth = {
     listener: AuthChangeListener,
     directCallback?: boolean
   ) {
-    console.log('add auth changed', name);
-    console.log('has signed user', firebaseAuth.currentUser);
     listeners[name] = listener;
     if (
       firebaseAuth.currentUser !== null &&
       (directCallback === undefined || directCallback)
     ) {
       listener(firebaseAuth.currentUser);
-      console.log('user activate');
     }
   },
   deleteChangeListener(name: string) {
@@ -51,7 +48,6 @@ const auth = {
     delete listeners[name];
   },
   signOut(): Promise<void> {
-    console.log('lib, signout');
     return new Promise((reslove, reject) => {
       firebaseAuth
         .signOut()
@@ -62,7 +58,6 @@ const auth = {
 };
 
 firebaseAuth.onAuthStateChanged(u => {
-  console.log('raw, on auth state changed', u);
   const listenerKeys = Object.keys(listeners);
   listenerKeys.forEach(key => listeners[key](u));
 });

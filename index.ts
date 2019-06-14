@@ -1,5 +1,5 @@
 import { FirestoreCollection, FirestoreDocument } from './firestore';
 import Storage from './storage';
-import auth from './auth';
+import Auth from './auth';
 
-export { FirestoreCollection, FirestoreDocument, Storage, auth };
+export { FirestoreCollection, FirestoreDocument, Storage, Auth };
