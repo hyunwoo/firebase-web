@@ -8,6 +8,7 @@ export enum SignInMethod {
 }
 
 export type AuthChangeListener = (user: firebase.User | null) => void;
+const beforeListeners: { [field: string]: AuthChangeListener } = {};
 const listeners: { [field: string]: AuthChangeListener } = {};
 
 const auth = {
@@ -28,15 +29,28 @@ const auth = {
     }
     firebaseAuth.signInWithRedirect(provider);
   },
+  addChangeBeforeListener(
+    name: string,
+    listener: AuthChangeListener,
+    immediate?: boolean
+  ) {
+    beforeListeners[name] = listener;
+    if (
+      firebaseAuth.currentUser !== null &&
+      (immediate === undefined || immediate)
+    ) {
+      listener(firebaseAuth.currentUser);
+    }
+  },
   addChangeListener(
     name: string,
     listener: AuthChangeListener,
-    directCallback?: boolean
+    immediate?: boolean
   ) {
     listeners[name] = listener;
     if (
       firebaseAuth.currentUser !== null &&
-      (directCallback === undefined || directCallback)
+      (immediate === undefined || immediate)
     ) {
       listener(firebaseAuth.currentUser);
     }
@@ -58,6 +72,9 @@ const auth = {
 };
 
 firebaseAuth.onAuthStateChanged(u => {
+  const beforeListenerKeys = Object.keys(beforeListeners);
+  beforeListenerKeys.forEach(key => listeners[key](u));
+
   const listenerKeys = Object.keys(listeners);
   listenerKeys.forEach(key => listeners[key](u));
 });
