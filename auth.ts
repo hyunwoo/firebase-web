@@ -1,5 +1,6 @@
 import { auth as firebaseAuth } from './app';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
+import _ from 'lodash';
 
 export enum SignInMethod {
   Google,
@@ -71,9 +72,10 @@ const auth = {
   }
 };
 
-firebaseAuth.onAuthStateChanged(u => {
+firebaseAuth.onAuthStateChanged(async u => {
   const beforeListenerKeys = Object.keys(beforeListeners);
-  beforeListenerKeys.forEach(key => listeners[key](u));
+  await Promise.all(_.map(beforeListenerKeys, key => beforeListeners[key](u)));
+  // beforeListenerKeys.forEach(key => listeners[key](u));
 
   const listenerKeys = Object.keys(listeners);
   listenerKeys.forEach(key => listeners[key](u));
