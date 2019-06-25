@@ -1,5 +1,5 @@
 import { FirestoreCollection, FirestoreDocument, FirestoreDocumentData } from './firestore';
 import Storage from './storage';
 import Auth from './auth';
-
-export { FirestoreCollection, FirestoreDocument, Storage, Auth, FirestoreDocumentData };
+import { perf as Performance } from './app';
+export { FirestoreCollection, FirestoreDocument, Storage, Auth, FirestoreDocumentData, Performance };
