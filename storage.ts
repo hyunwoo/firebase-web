@@ -5,10 +5,11 @@ class Storage {
   constructor(location: string) {
     this.ref = storage.ref(location);
   }
-  public async uploadString(data: string, format?: string): Promise<void> {
+  public async uploadString(data: string, meta?: firebase.storage.UploadMetadata): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+
       this.ref
-        .putString(data, format)
+        .putString(data, undefined, meta)
         .then(() => resolve())
         .catch(reject);
     });
